@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -7,6 +11,8 @@ const { userCtrl } = require("./controllers/userCtrl");
 
 const app = express();
 const server = createServer(app);
+
+const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -42,4 +48,4 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => console.log("Server running on port 3000"));
+server.listen(port, () => console.log("Server running on port 3000"));
