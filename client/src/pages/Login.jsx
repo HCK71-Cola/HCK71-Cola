@@ -15,8 +15,9 @@ export default function Login() {
         password,
       });
       let { data } = res;
-
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userName", data.user);
+      localStorage.setItem("UserId", data.UserId);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -34,7 +35,7 @@ export default function Login() {
       ></div>
       <div className="relative bg-white bg-opacity-80 shadow-lg rounded-lg p-8 max-w-md w-full backdrop-blur-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-5">
-          Welcome Back
+          Welcome
         </h2>
         <form onSubmit={submitLogin}>
           <div className="mb-4">

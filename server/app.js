@@ -1,6 +1,5 @@
 const express = require("express");
 const { createServer } = require("http");
-// const { join } = require('node:path');
 const { Server } = require("socket.io");
 const { Message } = require("./models/index");
 const cors = require("cors");
@@ -23,12 +22,8 @@ const io = new Server(server, {
   },
 });
 
-io.on("error", (error) => {
-  console.log(error);
-});
-
 io.on("connection", (socket) => {
-  console.log("a user connected njay");
+  console.log("a user connected");
 
   socket.on("messages", async () => {
     const messages = await Message.findAll();
@@ -36,12 +31,15 @@ io.on("connection", (socket) => {
   });
 
   socket.on("messages:post", async (body) => {
-    console.log(body);
-    await Message.create(body);
-
+    let UserId = body.userId;
+    let text = body.text;
+    await Message.create({
+      text,
+      UserId,
+    });
     const messages = await Message.findAll();
     io.emit("messages", messages);
   });
 });
 
-server.listen(3000, () => console.log(3000));
+server.listen(3000, () => console.log("Server running on port 3000"));
