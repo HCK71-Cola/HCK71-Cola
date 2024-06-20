@@ -6,7 +6,9 @@ const useSocket = () => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:3000", { transports: ["websocket"] });
+    const newSocket = io("https://colaonta.zainalalmasyhur.online", {
+      transports: ["websocket"],
+    });
     setSocket(newSocket);
 
     newSocket.on("connect", () => {

@@ -22,7 +22,8 @@ export default function Register() {
       setPassword("");
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log(Object.keys(error));
+      console.log(error.response?.data?.message || error.stack);
     }
   };
 
@@ -37,7 +38,7 @@ export default function Register() {
       ></div>
       <div className="relative bg-white bg-opacity-80 shadow-lg rounded-lg p-8 max-w-md w-full backdrop-blur-md">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-5">
-          Create Account
+          | Create Account |
         </h2>
         <form onSubmit={submitRegis}>
           <div className="mb-4">
